@@ -39,8 +39,12 @@ class Card
     value > card.value
   end
 
+  def +(card)
+    value + card.value
+  end
+
   def to_s
-    "a #{face} of #{suit} has the value of #{value}"
+    "a #{face} of #{suit}"
   end
 
 end

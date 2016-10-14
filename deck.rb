@@ -17,6 +17,6 @@ class Deck < Array
 
 end
 
-deck = Deck.new
-
-puts deck
+# deck = Deck.new
+#
+# puts deck
