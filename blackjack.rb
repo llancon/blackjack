@@ -86,7 +86,7 @@ class Game
     choice = gets.chomp.downcase # called .downcase so if the user inputs HIT or STAY this still works here
     if choice == 'hit'
       hit
-    else  
+    else
       puts 'Player stays'
     end
   end
@@ -98,6 +98,7 @@ class Game
   end
 
   def computer_hit
+    puts 'The computer draws'
     computer << game.draw while computer_value < 17
   end
 
