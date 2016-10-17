@@ -24,8 +24,8 @@ class Card
       face.to_i
     end
   end
-
-  def +(other)  # changed argument from card to other to match rubocops preferred styling
+  # changed argument from card to other to match rubocops preferred styling
+  def +(other)
     value + other.value
   end
 

@@ -1,7 +1,6 @@
 require_relative 'card'
 
 class Deck < Array
-
   def initialize
     Card.suits.each do |suits|
       Card.faces.each do |face|
@@ -14,5 +13,4 @@ class Deck < Array
   def draw
     shift
   end
-
 end

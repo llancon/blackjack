@@ -18,11 +18,9 @@ class Game
   def initial_set_up
     2.times { player_one << game.draw }
     puts "player has #{simplified(player_one)}"
-    # puts player_one
     puts "player one score is: #{player_one_value}"
     2.times { computer << game.draw }
     puts "computer has #{computer.first}"
-    # puts "computer score is: #{computer_value}"
   end
 
   def simplified(hand)
@@ -88,7 +86,7 @@ class Game
     choice = gets.chomp.downcase # called .downcase so if the user inputs HIT or STAY this still works here
     if choice == 'hit'
       hit
-    elsif choice == 'stay'
+    else  
       puts 'Player stays'
     end
   end
