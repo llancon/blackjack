@@ -17,10 +17,10 @@ class Game
 
   def initial_set_up
     2.times { player_one << game.draw }
-    puts "player has #{simplified(player_one)}"
-    puts "player one score is: #{player_one_value}"
+    puts "Player has #{simplified(player_one)}"
+    puts "Player one score is: #{player_one_value}"
     2.times { computer << game.draw }
-    puts "computer has #{computer.first}"
+    puts "Computer has #{computer.first}"
   end
 
   def simplified(hand)
@@ -38,15 +38,15 @@ class Game
   end
 
   def score
-    puts "player has #{simplified(player_one)}"
-    puts "player one score is: #{player_one_value}"
+    puts "Player has #{simplified(player_one)}"
+    puts "Player one score is: #{player_one_value}"
     puts "Computer has #{simplified(computer)}"
-    puts "computer score is: #{computer_value}"
+    puts "Computer score is: #{computer_value}"
   end
 
   def player_score
-    puts "player has #{simplified(player_one)}"
-    puts "player one score is: #{player_one_value}"
+    puts "Player has #{simplified(player_one)}"
+    puts "Player one score is: #{player_one_value}"
   end
 
   def player_one_value
@@ -72,19 +72,16 @@ class Game
     blackjack?
     if player_one_value > computer_value
       puts 'You won the hand'
-      score
     elsif computer_value > player_one_value
       puts 'You lost'
-      score
     elsif player_one_value == computer_value
       puts 'You won the hand'
-      score
     end
   end
 
   def hit_or_stay?
     blackjack?
-    puts 'would you like to hit or stay?'
+    puts 'Would you like to hit or stay?'
     choice = gets.chomp.downcase # called .downcase so if the user inputs HIT or STAY this still works here
     if choice == 'hit'
       hit
