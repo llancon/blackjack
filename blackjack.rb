@@ -85,7 +85,7 @@ class Game
   def hit_or_stay?
       blackjack?
       puts "would you like to hit or stay?"
-        choice = gets.chomp
+        choice = gets.chomp.downcase  #called .downcase so if the user inputs HIT or STAY this still works here
           if choice == "hit"
             hit
           elsif choice == "stay"
@@ -121,7 +121,7 @@ class Game
 
   def play_again?
     puts "Would you like to play again, hit y for yes?"
-    choice = gets.chomp
+    choice = gets.chomp.downcase
     if choice == "y"
       Game.new.play
     else
