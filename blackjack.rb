@@ -22,17 +22,14 @@ class Game
         # puts player_one
         puts "player one score is: #{player_one_value}"
       2.times {computer << game.draw}
-      puts "computer has #{simplified(computer)}"
-      puts "computer score is: #{computer_value}"
+      puts "computer has #{computer.first}"
+      # puts "computer score is: #{computer_value}"
   end
 
   def simplified(hand)
     hand.collect { |card| card.to_s}.join(", ")
   end
 
-  # def first_card(hand)
-  #    hand.each do {|card| simplified.first}(" ")
-  # end
 
   def score
     puts "player has #{simplified(player_one)}"
@@ -40,6 +37,8 @@ class Game
     puts "Computer has #{simplified(computer)}"
     puts "computer score is: #{computer_value}"
   end
+
+
   def player_one_value
     player_one.reduce(0){|sum, card| sum + card.value }
   end
@@ -75,11 +74,8 @@ class Game
         choice = gets.chomp
         if choice == "hit"
           hit
-          computer_hit
-          # busted?
+          
         elsif choice == "stay"
-          computer_hit
-          score
           # if computer_value > 22
 
           # end
@@ -120,6 +116,7 @@ class Game
   def play
     initial_set_up
     hit_or_stay?
+    computer_hit
     busted?
     winning_conditions
     play_again?
