@@ -2,14 +2,13 @@ require_relative 'card.rb'
 require_relative 'deck.rb'
 
 class Game
-
   attr_accessor :hands,
-              :player_one,
-              :computer,
-              :player_one_value,
-              :computer_value,
-              :game,
-              :score
+                :player_one,
+                :computer,
+                :player_one_value,
+                :computer_value,
+                :game,
+                :score
   def initialize
     self.player_one = []
     self.computer = []
@@ -17,17 +16,17 @@ class Game
   end
 
   def initial_set_up
-      2.times {player_one << game.draw}
-        puts "player has #{simplified(player_one)}"
-        # puts player_one
-        puts "player one score is: #{player_one_value}"
-      2.times {computer << game.draw}
-      puts "computer has #{computer.first}"
-      # puts "computer score is: #{computer_value}"
+    2.times { player_one << game.draw }
+    puts "player has #{simplified(player_one)}"
+    # puts player_one
+    puts "player one score is: #{player_one_value}"
+    2.times { computer << game.draw }
+    puts "computer has #{computer.first}"
+    # puts "computer score is: #{computer_value}"
   end
 
   def simplified(hand)
-    hand.collect { |card| card.to_s}.join(", ")
+    hand.collect(&:to_s).join(', ')
   end
 
   def play
@@ -53,18 +52,19 @@ class Game
   end
 
   def player_one_value
-    player_one.reduce(0){|sum, card| sum + card.value }
+    player_one.reduce(0) { |sum, card| sum + card.value }
   end
 
   def computer_value
-    computer.reduce(0){|sum, card| sum + card.value }
+    computer.reduce(0) { |sum, card| sum + card.value }
   end
+
   def blackjack?
     if player_one_value == 21
-      puts "You got Blackjack!!"
+      puts 'You got Blackjack!!'
       play_again?
     elsif computer_value == 21
-      puts "Computer hit Blackjack!!"
+      puts 'Computer hit Blackjack!!'
       score
       play_again?
     end
@@ -73,56 +73,52 @@ class Game
   def winning_conditions
     blackjack?
     if player_one_value > computer_value
-      puts "You won you hand"
+      puts 'You won you hand'
       score
     elsif computer_value > player_one_value
-      puts "You lost"
+      puts 'You lost'
     elsif player_one_value == computer_value
-      puts "You won hand"
+      puts 'You won hand'
     end
   end
 
   def hit_or_stay?
-      blackjack?
-      puts "would you like to hit or stay?"
-        choice = gets.chomp.downcase  #called .downcase so if the user inputs HIT or STAY this still works here
-          if choice == "hit"
-            hit
-          elsif choice == "stay"
-            puts "Player stays"
-          end
+    blackjack?
+    puts 'would you like to hit or stay?'
+    choice = gets.chomp.downcase # called .downcase so if the user inputs HIT or STAY this still works here
+    if choice == 'hit'
+      hit
+    elsif choice == 'stay'
+      puts 'Player stays'
+    end
   end
 
   def hit
-      player_one << game.draw
-      player_score
-      if player_one_value < 22
-        hit_or_stay?
-      end
+    player_one << game.draw
+    player_score
+    hit_or_stay? if player_one_value < 22
   end
 
   def computer_hit
-    while computer_value < 17
-      computer << game.draw
-    end
+    computer << game.draw while computer_value < 17
   end
 
   def busted?
     if player_one_value > 21
-      puts "You busted"
+      puts 'You busted'
       score
       play_again?
     elsif computer_value > 21
-      puts "Computer busted"
+      puts 'Computer busted'
       score
       play_again?
     end
   end
 
   def play_again?
-    puts "Would you like to play again, hit y for yes?"
+    puts 'Would you like to play again, hit y for yes?'
     choice = gets.chomp.downcase
-    if choice == "y"
+    if choice == 'y'
       Game.new.play
     else
       exit
@@ -130,4 +126,4 @@ class Game
   end
 end
 
-game = Game.new.play
+Game.new.play # took out game = here, it isn't needed to run the game
