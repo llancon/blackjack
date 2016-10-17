@@ -30,6 +30,10 @@ class Game
     hand.collect { |card| card.to_s}.join(", ")
   end
 
+  # def first_card(hand)
+  #    hand.each do {|card| simplified.first}(" ")
+  # end
+
   def score
     puts "player has #{simplified(player_one)}"
     puts "player one score is: #{player_one_value}"
@@ -45,9 +49,11 @@ class Game
   end
   def blackjack?
     if player_one_value == 21
-      puts "Blackjack!!"
+      puts "You got Blackjack!!"
+      play_again?
     elsif computer_value == 21
-      puts "Blackjack!!"
+      puts "Computer hit Blackjack!!"
+      play_again?
     end
   end
 
@@ -55,28 +61,40 @@ class Game
     blackjack?
     if player_one_value > computer_value
       puts "You won you hand"
+      score
     elsif computer_value > player_one_value
       puts "You lost"
-    elsif player_one_value == 21 || computer_value == 21
-      "Blackjack!!"
-    else
-    "You tied"
+
+    elsif player_one_value == computer_value
+      puts "You won hand"
     end
   end
 
   def hit_or_stay?
-      puts "would you like to hit or stay?"
-      choice = gets.chomp
-    if choice == "hit"
-      hit
-    else
-      puts "Player stays"
-    end
+        puts "would you like to hit or stay?"
+        choice = gets.chomp
+        if choice == "hit"
+          hit
+          computer_hit
+          # busted?
+        elsif choice == "stay"
+          computer_hit
+          score
+          # if computer_value > 22
+
+          # end
+          puts "Player stays"
+        end
   end
 
   def hit
     player_one << game.draw
     score
+  end
+  def computer_hit
+    if computer_value < 17
+      computer << game.draw
+    end
   end
 
   def busted?
@@ -85,6 +103,7 @@ class Game
       play_again?
     elsif computer_value > 21
       puts "Computer busted"
+      play_again?
     end
   end
 
@@ -93,7 +112,8 @@ class Game
     choice = gets.chomp
     if choice == "y"
       Game.new.play
-      # play
+    else
+      exit
     end
   end
 
@@ -102,7 +122,7 @@ class Game
     hit_or_stay?
     busted?
     winning_conditions
-    
+    play_again?
   end
 end
 
