@@ -71,12 +71,14 @@ class Game
   def winning_conditions
     blackjack?
     if player_one_value > computer_value
-      puts 'You won you hand'
+      puts 'You won the hand'
       score
     elsif computer_value > player_one_value
       puts 'You lost'
+      score
     elsif player_one_value == computer_value
-      puts 'You won hand'
+      puts 'You won the hand'
+      score
     end
   end
 
