@@ -30,6 +30,15 @@ class Game
     hand.collect { |card| card.to_s}.join(", ")
   end
 
+  def play
+    initial_set_up
+    hit_or_stay?
+    computer_hit
+    busted?
+    winning_conditions
+    score
+    play_again?
+  end
 
   def score
     puts "player has #{simplified(player_one)}"
@@ -63,30 +72,27 @@ class Game
       score
     elsif computer_value > player_one_value
       puts "You lost"
-
     elsif player_one_value == computer_value
       puts "You won hand"
     end
   end
 
   def hit_or_stay?
-        puts "would you like to hit or stay?"
+      puts "would you like to hit or stay?"
         choice = gets.chomp
-        if choice == "hit"
-          hit
-          
-        elsif choice == "stay"
-          # if computer_value > 22
-
-          # end
-          puts "Player stays"
-        end
+          if choice == "hit"
+            hit
+          elsif choice == "stay"
+            puts "Player stays"
+          end
   end
 
   def hit
     player_one << game.draw
     score
+    hit_or_stay?
   end
+  
   def computer_hit
     if computer_value < 17
       computer << game.draw
@@ -111,15 +117,6 @@ class Game
     else
       exit
     end
-  end
-
-  def play
-    initial_set_up
-    hit_or_stay?
-    computer_hit
-    busted?
-    winning_conditions
-    play_again?
   end
 end
 
