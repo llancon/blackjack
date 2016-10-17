@@ -47,6 +47,10 @@ class Game
     puts "computer score is: #{computer_value}"
   end
 
+  def player_score
+    puts "player has #{simplified(player_one)}"
+    puts "player one score is: #{player_one_value}"
+  end
 
   def player_one_value
     player_one.reduce(0){|sum, card| sum + card.value }
@@ -61,6 +65,7 @@ class Game
       play_again?
     elsif computer_value == 21
       puts "Computer hit Blackjack!!"
+      score
       play_again?
     end
   end
@@ -78,6 +83,7 @@ class Game
   end
 
   def hit_or_stay?
+      blackjack?
       puts "would you like to hit or stay?"
         choice = gets.chomp
           if choice == "hit"
@@ -88,13 +94,15 @@ class Game
   end
 
   def hit
-    player_one << game.draw
-    score
-    hit_or_stay?
+      player_one << game.draw
+      player_score
+      if player_one_value < 22
+        hit_or_stay?
+      end
   end
-  
+
   def computer_hit
-    if computer_value < 17
+    while computer_value < 17
       computer << game.draw
     end
   end
@@ -102,9 +110,11 @@ class Game
   def busted?
     if player_one_value > 21
       puts "You busted"
+      score
       play_again?
     elsif computer_value > 21
       puts "Computer busted"
+      score
       play_again?
     end
   end
